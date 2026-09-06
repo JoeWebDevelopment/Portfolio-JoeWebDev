@@ -1,0 +1,35 @@
+@font-face {
+  font-family: "Space Grotesk";
+  src: url("/assets/fonts/SpaceGrotesk-VariableFont_wght.ttf") format("truetype");
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer customAttributes{
+:root{
+    /* Colors */
+    --clr-black: #151515;
+    --clr-teal: #4EE1A0;
+    --clr-lightBlack: #242424;
+    --clr-grey: #d9d9d9;
+    --clr-white: #FFFFFF;
+
+
+    /* Typography */
+    --ff--main: 'Space Grotesk', sans-serif;
+
+    /*  */
+}
+    
+
+body{
+    background-color: var(--clr-black);
+    font-family: var(--ff--main);
+}
+
+.name{
+    color: var(--clr-white);
+}
+
+}
