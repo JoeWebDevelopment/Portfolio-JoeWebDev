@@ -21,15 +21,693 @@
 
     /*  */
 }
-    
+
+@layer reset{
+    /* Padding and borders should not change an element's declared size. */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Browser margin/padding defaults vary wildly across elements and vendors.
+   Start from zero - handle spacing intentionally via the design system. */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Prevents flex/grid children from overflowing their container.
+   The default min-width: auto on flex and grid children causes overflow bugs
+   that are notoriously confusing to debug. */
+* {
+  min-width: 0;
+}
+
+/* Hidden means hidden: !important is warranted here. */
+[hidden] {
+  display: none !important;
+}
+
+/* Allows CSS transitions to/from intrinsic keyword sizes (auto, min-content, etc.).
+   Only meaningful for users who haven't requested reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+/* Prevent adjustments of font size after orientation changes in iOS. */
+html {
+  -webkit-text-size-adjust: 100%; /* Safari, iOS Safari */
+  text-size-adjust: 100%;         /* Chrome, Edge, Firefox Android */
+}
+
+/* Ensures the page occupies at least the full viewport.
+   dvh accounts for mobile browser UI (address bar, navigation)
+   and overrides the vh fallback in browsers that support it. */
+body {
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+/* Reserves space for the scrollbar, when the scrollbar is not showing.
+   Prevents flicker when changes on the page cause the scrollbar to toggle. */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* Scroll events captured by the scrolling area you're pointing at, by default. */
+html {
+  overscroll-behavior: contain;
+}
+
+/* Antialiased rendering looks better on high-DPI (retina) screens.
+   On lower-DPI displays, subpixel antialiasing (the default) can be
+   sharper, so this is slightly lossy on older monitors.
+   Enable kerning and ligatures at small font-sizes by default. */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-smooth: always;
+  text-rendering: optimizeLegibility;
+}
+
+/* A unitless line-height avoids inheritance math issues.
+   The smaller default line-height for h-elements avoids excessive
+   line-height when your design system (likely) applies larger fonts.
+   WCAG recommends at least 1.5 for body copy. */
+body {
+  line-height: 1.5;
+}
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.1;
+}
+
+/* Prevents long URLs or unbreakable strings from blowing out their container. */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* Smarter line-breaking:
+   'pretty' avoids widows (lone words on the last line of a paragraph).
+   'balance' distributes heading text more evenly across lines. 
+   Harmless in browsers that don't support them. */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/* Headings carry semantic meaning, not visual weight.
+   h1–h6 sizing and boldness should come from your design system. */
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+/* Inline embedded content has a gap at the bottom caused by baseline alignment.
+   Block display removes it; max-width prevents overflow.
+   height: auto preserves aspect ratio when max-width constrains the width. */
+img, picture, video, canvas, svg, embed, iframe, object, audio {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Exemption for SVG icons (Heroicons/Lucide/Phosphor, etc.) with explicit sizes:
+   these should not be constrained. */
+svg[width][height] {
+  max-width: revert;
+}
+
+/* Strips visual chrome from buttons so they can be styled from scratch. */
+button {
+  background: none;
+  border: none;
+}
+
+/* Form elements use OS-level fonts and ignore font inheritance by default. */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* Strips OS-level native styling from interactive elements.
+   Leaves border and background intact, providing accessibility by default.
+   Visual styling should be handled by the design system. */
+input, button, textarea, select {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Anything interactive should signal clickability.
+   'button' attribute targets [type="button"], [type="submit"], etc. */
+button,
+[role="button"],
+label,
+summary,
+select {
+  cursor: pointer;
+}
+
+/* Inherit color by default so links don't always appear in browser-default blue.
+   Text-decoration is intentionally left as underlined for accessibility. */
+a {
+  color: inherit;
+}
+
+/* Removes bullets/numbers.
+   list markers should be an explicit choice, not a default. */
+ul, ol {
+  list-style: none;
+}
+
+/* Tables default to separated borders with spacing between cells.
+   For any custom table design, you'll want to collapse the borders. */
+table {
+  border-collapse: collapse;
+}
+
+/* Browsers apply bold to <th> elements.
+   Boldness in tables should be controlled by your design system. */
+th {
+  font-weight: inherit;
+}
+
+/* Fieldsets have a surprise border and padding that most UIs don't want. */
+fieldset {
+  border: none;
+  padding: 0;
+}
+
+/* More of a normalization, but these are inconsistently styled in some browsers. */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sub { bottom: -0.25em; }
+sup { top: -0.5em; }
+
+/* Ensures monospace elements render at the same size as surrounding text. */
+pre, code, kbd, samp {
+  font-family: monospace;
+  font-size: inherit;
+}
+
+/* Browser-generated quotation marks are rarely wanted in a design system. */
+blockquote,
+q {
+  quotes: none;
+}
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+  content: none;
+}
+
+/* Creates an explicit stacking context on the app root.
+   Prevents z-index bleed from portals, modals, or tooltips
+   from leaking out unexpectedly. */
+#root {
+  isolation: isolate;
+}
+}
+
+
+}
+    *, *::after, *::before{
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
 body{
     background-color: var(--clr-black);
     font-family: var(--ff--main);
+    color: var(--clr-white);
+    width: 100%;
 }
 
 .name{
     color: var(--clr-white);
 }
 
+.social-links-header{
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    gap: 2.5rem;
+    justify-content: center;
+    align-items: center;
+    
+
+
+}
+
+.hero-img{
+    width: 100%;
+    max-width: 445px;
+
+}
+
+header{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-container{
+    width: 100%;
+    max-width: 1110px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.primary-nav{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    max-width: 1110px;
+    top: 0;
+    z-index: 2;
+    padding-block-start: 1.5rem;
+}
+
+.hero{
+    width: 100%;    
+
+}
+
+.hero-img-container{
+    position: relative;
+    z-index: -2;
+
+}
+
+.hero-img-container::before{
+    content: "";
+    height: 129px;
+    width: 129px;
+    background-image: url("assets/images/pattern-circle.svg");
+    position: absolute;
+    background-repeat: no-repeat;
+    left: -65px;
+    bottom: 100px;
+}
+
+.hero-two-column{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 1110px;
+    position: relative;
+}
+
+.hero-content-text{
+    justify-self: center;
+    align-self: center;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+}
+
+.hero-heading{
+     font-family: var(--ff--main);
+    font-size: 5.5rem;
+    font-weight: 700;
+    line-height: 5.5rem;
+    letter-spacing: -0.15625rem;
+}
+
+.hero-content{
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.hero-text{
+    font-family: "Space Grotesk";
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: 28px;
+color: var(--clr-grey);
+max-width: 445px;
+}
+
+.contact-link{
+    font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 26px; /* 162.5% */
+letter-spacing: 2.286px;
+text-decoration: 2px underline var(--clr-teal);
+text-underline-offset: 10px;
+
+}
+.underline{
+    text-decoration: 6px underline var(--clr-teal);
+    text-underline-offset: 12px;
+
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    gap: 3.5rem;
+    padding-top: 3.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+hr{
+    border: 1px solid var(--clr-grey);
+    width: 100%;
+    background-color: var(--clr-grey);
+    color: var(--clr-grey);
+    max-width: 1110px;
+}
+
+.skills{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.skills-grid-container{
+    display: flex;
+    width: 100%;
+    max-width: 1110px;
+}
+
+.skills-grid{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    row-gap: 4rem;
+
+
+}
+.skill-card{
+    flex-basis: 33%;
+    width: 100%;
+    gap: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.skill-heading{
+font-family: "Space Grotesk";
+font-size: 48px;
+font-style: normal;
+font-weight: 700;
+line-height: 56px; /* 116.667% */
+letter-spacing: -1.5px;
+}
+
+.yoe{
+    color: var(--clr-grey);
+    font-family: "Space Grotesk";
+font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: 28px;
+}
+
+.projects{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: flex-start;
+    justify-content: center;
+    align-items: center;
+    gap: 3.5rem;
+}
+.projects-header{
+    width: 100%;
+    max-width: 1110px;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.projects-header-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+}
+
+.projects-header{
+  font-size: 5.5rem;
+font-style: normal;
+font-weight: 700;
+line-height: 5.5rem; /* 100% */
+letter-spacing: -0.15625rem;
+}
+
+.projects-container{
+  width: 100%;
+  max-width: 1110px;
+  display: flex;
+}
+
+.projects-grid{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1rem;
+}
+
+.project-card{
+  flex-basis: 49%;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+}
+
+.tag-group{
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.75rem;  
+}
+
+.project-img-container{
+  position: relative;
+}
+
+.overlay{
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  display: flex;
+  opacity: 0;
+
+}
+
+.project-link{
+  text-decoration: 2px underline var(--clr-teal);
+  text-underline-offset: 5px;
+  font-size: 1rem;
+font-style: normal;
+font-weight: 700;
+line-height: 1.625rem; /* 162.5% */
+letter-spacing: 0.14288rem;
+
+}
+
+.project-img-container:hover .overlay, .project-img-container:focus-within .overlay{
+  opacity: 1;
+  background-color: rgb(0 0 0 / 80%);
+}
+
+.project-link:hover{
+  color: var(--clr-teal);
+}
+
+.tag{
+  font-size: 1.125rem;
+font-style: normal;
+font-weight: 500;
+line-height: 1.75rem;
+color: var(--clr-grey);
+}
+
+.project-links-mobile-tablet{
+  display: none;
+}
+
+.contact-form-section{
+  background-color: var(--clr-lightBlack);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-block: 3.5rem;
+  background-image: url('assets/images/pattern-rings.svg');
+  background-repeat: no-repeat;
+  background-position: bottom left -150px;
+  background-size: 600px;
+}
+
+.form-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 1110px;
+}
+
+.contact-text-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 445px;
+  gap: 2.25rem;
+}
+
+.contact-heading{
+  font-size: 88px;
+font-style: normal;
+font-weight: 700;
+line-height: 88px; /* 100% */
+letter-spacing: -2.5px;
+}
+.contact-text{
+  font-size: 18px;
+font-style: normal;
+font-weight: 500;
+line-height: 28px;
+color: var(--clr-grey);
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2.5rem;
+  width: 100%;
+  max-width: 445px;
+}
+
+label{
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+input{
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 0 0 .75rem 0;
+  font-size: 0.875rem;
+  color: var(--clr-grey);
+  width: 100%;
+}
+
+input::placeholder{
+  color: var(--clr-grey);
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+textarea{
+  background-color: transparent;
+  border: none;
+  resize: none;
+  font-size: 0.875rem;
+  color: var(--clr-grey);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  width: 100%;
+  height: 107px;
+
+}
+textarea::placeholder{
+  color: var(--clr-grey);
+  opacity: 0.5;
+  text-transform: uppercase;
+}
+
+button[type=submit]{
+  align-self: flex-end;
+  text-decoration: 2px underline var(--clr-teal);
+  text-underline-offset: 8px;
+  color: white;
+  text-transform: uppercase;
+  font-size: 16px;
+font-style: normal;
+font-weight: 700;
+line-height: 26px; /* 162.5% */
+letter-spacing: 2.286px;
+}
+
+footer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3.5rem;
+  background-color: var(--clr-lightBlack);
+  gap: 2.5rem;
+}
+
+.footer-container{
+  display: flex;
+  width: 100%;
+  max-width: 1110px;
+  justify-content: space-between;
+}
+
+.social-links-footer{
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
 }
