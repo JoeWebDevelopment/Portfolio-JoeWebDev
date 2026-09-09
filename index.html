@@ -210,7 +210,11 @@
       </p>    
       </div>
     
-      <form action="" class="contact">
+      <form name="contact" method="POST" action="/thank-you" data-netlify="true" netlify-honeypot="bot-field" class="contact">
+        <input type="hidden" name="form-name" value="contact">
+        <input type="hidden" name="subject" value="New portfolio contact — JoeWebDevelopment">
+        <p hidden><label>Leave this empty: <input name="bot-field" autocomplete="off"></label></p>
+        <p>All fields are required.</p>
         <label for="name" > <span class="visually-hidden">Name</span>
           <input type="text" name="name" id="name" required placeholder="Name">
         </label>
