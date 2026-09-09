@@ -301,10 +301,11 @@ header{
     top: 0;
     z-index: 2;
     padding-block-start: 1.5rem;
+    padding-inline-start: 1.5rem;
 }
 
 .hero{
-    width: 100%;    
+    width: 100%;   
 
 }
 
@@ -333,6 +334,7 @@ header{
     width: 100%;
     max-width: 1110px;
     position: relative;
+    padding-inline-start: 1.5rem;
 }
 
 .hero-content-text{
@@ -342,6 +344,7 @@ header{
     display: flex;
     flex-direction: column;
     gap: 4.5rem;
+    align-items: flex-start;
 }
 
 .hero-heading{
@@ -369,15 +372,21 @@ max-width: 445px;
 }
 
 .contact-link{
-    font-size: 16px;
+font-size: 16px;
 font-style: normal;
 font-weight: 700;
 line-height: 26px; /* 162.5% */
 letter-spacing: 2.286px;
 text-decoration: 2px underline var(--clr-teal);
 text-underline-offset: 10px;
+text-transform: uppercase;
 
 }
+
+.project-link{
+  text-transform: uppercase;
+}
+
 .underline{
     text-decoration: 6px underline var(--clr-teal);
     text-underline-offset: 12px;
@@ -412,6 +421,7 @@ hr{
     display: flex;
     width: 100%;
     max-width: 1110px;
+    padding-inline: 1rem;
 }
 
 .skills-grid{
@@ -462,6 +472,17 @@ line-height: 28px;
     align-items: center;
     gap: 3.5rem;
 }
+
+
+
+
+.card-heading{
+  font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: 32px;
+}
+
 .projects-header{
     width: 100%;
     max-width: 1110px;
@@ -483,12 +504,14 @@ font-style: normal;
 font-weight: 700;
 line-height: 5.5rem; /* 100% */
 letter-spacing: -0.15625rem;
+padding-inline: 1rem;
 }
 
 .projects-container{
   width: 100%;
   max-width: 1110px;
   display: flex;
+  padding-inline: 1rem;
 }
 
 .projects-grid{
@@ -498,11 +521,12 @@ letter-spacing: -0.15625rem;
   justify-content: center;
   align-items: center;
   width: 100%;
-  gap: 1rem;
+  column-gap: 30px;
+  row-gap: 2rem;
 }
 
 .project-card{
-  flex-basis: 49%;
+  flex-basis: calc((100% - 30px) / 2);
   display: flex;
   flex-direction: column;
   gap: .5rem;
@@ -581,6 +605,7 @@ color: var(--clr-grey);
   background-repeat: no-repeat;
   background-position: bottom left -150px;
   background-size: 600px;
+  padding-inline: 1.5rem;
 }
 
 .form-container{
@@ -630,6 +655,7 @@ label{
   flex-direction: column;
   gap: 1.25rem;
   width: 100%;
+  
 }
 
 input{
@@ -640,6 +666,7 @@ input{
   font-size: 0.875rem;
   color: var(--clr-grey);
   width: 100%;
+  padding-inline-start: 24px
 }
 
 input::placeholder{
@@ -669,6 +696,7 @@ textarea{
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   width: 100%;
   height: 107px;
+  padding-inline-start: 24px
 
 }
 textarea::placeholder{
@@ -711,3 +739,102 @@ footer{
   flex-direction: row;
   gap: 1.5rem;
 }
+
+
+.name{
+  font-size: 32px;
+font-style: normal;
+font-weight: 700;
+line-height: 32px; /* 100% */
+letter-spacing: -0.444px;
+}
+
+/* Tablet */
+@media (max-width: 995px){
+  .form-container{
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3.5rem;
+
+
+
+
+
+}
+
+.contact-text-container{
+ text-align: center;
+}
+
+.contact-form-section{
+  background-position: bottom left -450px;
+}
+
+.skills-grid{
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.skill-card{
+  flex-basis: 50%;
+  
+}
+
+.overlay{
+  display: none;
+}
+
+.project-links-mobile-tablet{
+  display: flex;
+  width: 100%;
+  gap: 2.5rem;
+}
+
+.hero-img{
+  max-width: 332px;
+}
+
+.hero-img-container{
+  overflow: hidden;
+}
+
+.hero-img-container::before{
+  left: 275px;
+  bottom: 0;
+  overflow: hidden;
+}
+
+.hero-content-text{
+  left:16px;
+  top: 125px;
+  max-width: 443px;
+}
+
+hr{
+  width: 100%;
+  max-width: calc(100% - 1.5rem);
+}
+
+.hero-heading{
+  font-size: 72px;
+font-style: normal;
+font-weight: 700;
+line-height: 72px; /* 100% */
+letter-spacing: -2.045px;
+max-width: 443px;
+}
+
+.projects-header{
+  font-size: 72px;
+font-style: normal;
+font-weight: 700;
+line-height: 72px; /* 100% */
+letter-spacing: -2.045px;
+}
+
+
+
+}
+
